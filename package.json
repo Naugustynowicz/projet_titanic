@@ -1,11 +1,30 @@
 {
-  "name": "projet_titanic",
+  "name": "base-projet-node",
   "version": "1.0.0",
-  "description": "",
+  "description": "Base de projet Node.js avec Express",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --ignore '*.json' server.js"
   },
-  "author": "Nicolas Augustynowicz",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmpp/node-projet.git"
+  },
+  "author": "JM Cléry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jmpp/node-projet/issues"
+  },
+  "homepage": "https://github.com/jmpp/node-projet#readme",
+  "devDependencies": {
+    "eslint": "^8.41.0",
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.2.0",
+    "pug": "^3.0.2"
+  },
+  "type": "module"
 }
