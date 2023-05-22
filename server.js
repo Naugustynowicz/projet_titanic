@@ -4,8 +4,6 @@ import express from "express"
 import mongoose from "mongoose"
 dotenv.config()
 
-//juste pour avoir un truc a commit
-
 const { APP_HOST, APP_PORT, MONGO_URI, NODE_ENV } = process.env
 
 const app = express()
