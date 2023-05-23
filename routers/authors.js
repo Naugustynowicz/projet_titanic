@@ -41,4 +41,8 @@ appRouter.get("/list", async (req, res) => {
   res.render("listAuthors", { authors })
 })
 
+appRouter.get("/inscription", (req, res) => {
+  res.render("inscription")
+})
+
 export default appRouter

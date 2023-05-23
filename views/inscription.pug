@@ -1,0 +1,37 @@
+block variables
+
+doctype html
+html(lang="fr")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title #{PAGE_TITLE} - Projet Node
+
+    block scripts
+  body
+
+    div
+      h1 Formulaire d'inscription
+      ul
+        li pseudo : 
+          input(type="text" id="pseudo")
+        li mot de passe : 
+          input(type="password" id="mot de passe") 
+        li Nom : 
+          input(type="text" id="nom")
+        li Prenom : 
+          input(type="text" id="prenom") 
+        li Addresse Mail : 
+          input(type="email" id="email") 
+        li Age : 
+          input(type="number" id="age")
+        li Date de Naissance : 
+          input(type="date" id="birthdate") 
+        li Nationnalité : 
+          input(type="text" id="nationnalite") 
+
+      input(type="submit")
+
+    footer
+      p - Mentions légales / Copyright 2023 -
