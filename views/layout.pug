@@ -1,5 +1,3 @@
-block variables
-
 doctype html
 html(lang="fr")
   head
@@ -7,9 +5,96 @@ html(lang="fr")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title #{PAGE_TITLE} - Projet Node
+    link(rel="stylesheet", href="/css/style.css")
+    style.
+     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+     body {
+       font-family: 'Roboto', sans-serif;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 30px;
+      }
+      nav {
+        font-family: 'Roboto', sans-serif;
+        height: 150px
+        display: flex;
+        background-color: #154c79;
+        color: white;
+      }
+      nav ul {
+        list-style-type: none;
+        height: 80px;
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center; /* Centrer horizontalement */
+        align-items: center; /* Centrer verticalement */
+      }
+      nav li {
+       
+        padding-right: 60px;
+      }
+      nav li a {
+        text-decoration: none;
+        color: inherit;
+      }
+    
+      form {
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-    block scripts
+      label {
+        color: #333;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        padding: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #154c79;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0d2f4b;
+      }
+      footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background-color: #f1f1f1;
+        padding: 10px;
+      }
+     
+
   body
+    nav
+      ul
+        li
+          a(href="/inscription") Inscription
+        li
+          a(href="/login") Connexion
+        li
+          a(href="/recherche") Recherche
 
     block content
 
