@@ -1,5 +1,6 @@
 import authors from "./routers/authors.js"
 import users from "./routers/users.js"
+import appRouter from "./routers/router.js"
 import dotenv from "dotenv"
 import express from "express"
 import mongoose from "mongoose"
@@ -20,9 +21,12 @@ app.use(express.urlencoded({ extended: false })) // Fourni l'objet "req.body" lo
 app.use("/author", authors)
 app.use("/users", users)
 
+// Utiliser le routeur
+app.use(appRouter)
+
 try {
   await mongoose.connect(MONGO_URI)
-  console.log("Connexion MonboDB établie!")
+  console.log("Connexion MongoDB établie!")
 
   app.listen(APP_PORT, () =>
     console.log(`L'application écoute sur http://${APP_HOST}:${APP_PORT}`)

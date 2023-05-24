@@ -1,0 +1,16 @@
+extends layout.pug
+
+block content
+  h1 Recherche
+
+  form(action="/results", method="POST")
+    label(for="sexe") Sexe:
+    input(type="text", name="sexe", id="sexe")
+
+    label(for="age") Âge:
+    input(type="text", name="age", id="age")
+
+    label(for="classe") Classe:
+    input(type="text", name="classe", id="classe")
+
+    button(type="submit") Rechercher
