@@ -1,4 +1,4 @@
-import authors from "./routers/authors.js"
+import authors from "./routers/router.js"
 import users from "./routers/users.js"
 import appRouter from "./routers/router.js"
 import dotenv from "dotenv"
