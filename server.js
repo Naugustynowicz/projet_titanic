@@ -1,4 +1,5 @@
 import authors from "./routers/authors.js"
+import users from "./routers/users.js"
 import dotenv from "dotenv"
 import express from "express"
 import mongoose from "mongoose"
@@ -17,6 +18,7 @@ app.locals.pretty = NODE_ENV !== "production" ? true : false
 // Déclaration des routeurs et middlewares
 app.use(express.urlencoded({ extended: false })) // Fourni l'objet "req.body" lors de la validation de formulaire
 app.use("/author", authors)
+app.use("/users", users)
 
 try {
   await mongoose.connect(MONGO_URI)
@@ -28,3 +30,25 @@ try {
 } catch (err) {
   console.log("Impossible de démarrer l'application Node", err.message)
 }
+
+const usersSchema = new mongoose.Schema({
+  pseudo: String,
+  motDePasse: String,
+  nom: String,
+  prenom: String,
+  email: String,
+  phoneNumber: String,
+  age: String,
+  birthDate: String,
+  nationnalite: String,
+})
+
+//const User = mongoose.model("User", usersSchema)
+mongoose.model("User", usersSchema)
+
+// const silence = new Kitten({ name: "Silence" })
+// const fluffy = new Kitten({ name: "fluffy" })
+// await fluffy.save()
+// const kittens = await Kitten.find({ name: /^fluff/ })
+// console.log(kittens)
+// console.log(silence.name) // 'Silence'

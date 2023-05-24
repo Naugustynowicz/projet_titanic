@@ -1,4 +1,6 @@
+import mongoose from "mongoose"
 import Author from "../models/Author.js"
+import Users from "../models/Users.js"
 import { Router } from "express"
 
 const appRouter = new Router()
@@ -39,16 +41,6 @@ appRouter.post("/add", async (req, res) => {
 appRouter.get("/list", async (req, res) => {
   const authors = await Author.find()
   res.render("listAuthors", { authors })
-})
-
-appRouter.get("/inscription", (req, res) => {
-  res.render("inscription")
-})
-
-appRouter.post("/inscription", (req, res) => {
-  console.log("test")
-  console.log(req.body.pseudo)
-  res.render("inscription")
 })
 
 export default appRouter
