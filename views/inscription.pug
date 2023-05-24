@@ -1,0 +1,34 @@
+extends layout
+
+block content
+    form(action="/author/inscription" method="POST")
+      section
+        fieldset
+          legend Formulaire d'inscription 
+          p
+            label(for="pseudo") pseudo : 
+            input(type="text" id="pseudo" name="pseudo")
+          p  
+            label(for="motDePasse") mot de passe : 
+            input(type="password" id="motDePasse" name="motDePasse") 
+          p
+            label(for="nom") Nom : 
+            input(type="text" id="nom" name="nom")
+          p
+            label(for="prenom") Prenom : 
+            input(type="text" id="prenom" name="prenom") 
+          p 
+            label(for="email") Addresse Mail : 
+            input(type="email" id="email" name="email") 
+          p
+            label(for="age") Age : 
+            input(type="number" id="age" name="age")
+          p
+            label(for="birthdate") Date de Naissance : 
+            input(type="date" id="birthdate" name="birthdate") 
+          p
+            label(for="nationnalite") Nationnalité : 
+            input(type="text" id="nationnalite" name="nationnalite") 
+      section
+        p
+          button(type="submit") Inscription
