@@ -2,11 +2,16 @@ extends layout.pug
 
 block content
   h1 Résultats de la recherche
+  canvas(id="barChart")
 
   if passengers.length > 0
     ul
       each passenger in passengers
-        li= passenger.Name
+        li= `${passenger.Name}, ${passenger.Age}`
 
   else
     p Aucun passager ne correspond à votre recherche.
+
+  button(type="button", id="resetButton") Reset
+
+    

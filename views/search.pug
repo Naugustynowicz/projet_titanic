@@ -3,7 +3,7 @@ extends layout.pug
 block content
   h1 Recherche
 
-  form(action="/results", method="POST")
+  form(id="searchForm", action="/results", method="POST")
     label(for="sexe") Sexe:
     input(type="text", name="sexe", id="sexe")
 

@@ -7,7 +7,13 @@ dotenv.config()
 const { APP_HOST, APP_PORT, MONGO_URI, NODE_ENV } = process.env
 
 const app = express()
-
+app.use(express.static(process.cwd(), {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+  }
+}));
 // Déclarer le moteur de rendu à Express
 app.set("view engine", "pug")
 
