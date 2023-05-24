@@ -45,4 +45,10 @@ appRouter.get("/inscription", (req, res) => {
   res.render("inscription")
 })
 
+appRouter.post("/inscription", (req, res) => {
+  console.log("test")
+  console.log(req.body.pseudo)
+  res.render("inscription")
+})
+
 export default appRouter
