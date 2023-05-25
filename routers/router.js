@@ -9,6 +9,44 @@ appRouter.get("/login", (req, res) => {
   res.render("login")
 })
 
+appRouter.post("/login", async (req, res) => {
+  const pseudo = req.body.username
+  const motDePasse = req.body.password
+  if (pseudo && pseudo.trim() != "") {
+    try {
+      console.log("ma recherche :", pseudo)
+
+      await Users.find({
+        pseudo: pseudo,
+        //motDePasse: motDePasse,
+      }).then((user) => {
+        if (user[0].motDePasse === motDePasse) {
+          res.cookie("user", pseudo).render("search", { pseudo })
+        } else {
+          const erreur = {
+            statut: "400",
+            message: "Le mot de passe ne correspond pas.",
+          }
+          res.render("erreurs", { erreur })
+        }
+      })
+    } catch (error) {
+      const erreur = {
+        statut: "400",
+        message: "Cet utilisateur n'existe pas.",
+      }
+      res.render("erreurs", { erreur })
+    }
+  } else {
+    const erreur = {
+      statut: "400",
+      message: "Merci de spécifier un nom d'utilisateur",
+    }
+    res.render("erreurs", { erreur })
+  }
+  //res.render("login")
+})
+
 // Route vers la page de recherche
 appRouter.get("/search", (req, res) => {
   res.render("search")
