@@ -6,6 +6,8 @@ block content
   canvas(id="barChartAvg")
   canvas(id="barChartStrdDev")
 
+  button(type="button", id="resetButton") Reset
+
   if passengers.length > 0
     ul
       each passenger in passengers
@@ -14,7 +16,7 @@ block content
   else
     p Aucun passager ne correspond à votre recherche.
 
-  button(type="button", id="resetButton") Reset
+ 
 
   // fichier JavaScript barGraph.js
   script(src="barGraph.js")

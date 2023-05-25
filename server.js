@@ -55,10 +55,3 @@ const usersSchema = new mongoose.Schema({
 
 //const User = mongoose.model("User", usersSchema)
 mongoose.model("User", usersSchema)
-
-// const silence = new Kitten({ name: "Silence" })
-// const fluffy = new Kitten({ name: "fluffy" })
-// await fluffy.save()
-// const kittens = await Kitten.find({ name: /^fluff/ })
-// console.log(kittens)
-// console.log(silence.name) // 'Silence'

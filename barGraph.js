@@ -3,6 +3,7 @@
 // Fonction pour créer le graphique en barre
 function createBarChart(labels, data, canvas, type) {
   const ctx = document.getElementById(canvas).getContext("2d")
+
   new Chart(ctx, {
     type: type,
     data: {
@@ -10,11 +11,13 @@ function createBarChart(labels, data, canvas, type) {
       datasets: [
         {
           data: data,
-          backgroundColor: ["green", "red"],
+          backgroundColor: ["#154c79", "crimson"],
         },
       ],
     },
-    options: {},
+    options: {
+      responsive: true,
+    }
   })
 }
 
@@ -27,8 +30,6 @@ searchForm.addEventListener("submit", async function (event) {
     const sexe = document.getElementById("sexe").value
     const age = document.getElementById("age").value
     const classe = document.getElementById("classe").value
-
-    console.log("Valeurs du formulaire :", sexe, age, classe)
 
     // J'envoie la requête POST directement au routeur côté serveur
     const response = await fetch("/results", {
@@ -45,7 +46,6 @@ searchForm.addEventListener("submit", async function (event) {
 
     if (response.ok) {
       const data = await response.json()
-      console.log("Données récupérées :", data)
 
       // J'utilise les données récupérées pour créer le graphique en barre
       if (data.length > 0) {
