@@ -1,32 +1,7 @@
 /* eslint-disable no-undef */
 
-// Fonction pour effectuer la requête à la base de données
-async function searchPassengers() {
-    const sexe = document.getElementById('sexe').value;
-    const age = document.getElementById('age').value;
-    const classe = document.getElementById('classe').value;
-
-    const response = await fetch('/results', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            sexe: sexe,
-            age: age,
-            classe: classe
-        })
-    });
-
-    if (response.ok) {
-        return await response.json();
-    } else {
-        throw new Error('Erreur lors de la récupération des passagers.');
-    }
-}
-
 // Fonction pour créer le graphique en barre
-function createBarChart(labels, data) {
+export function createBarChart(labels, data) {
     const ctx = document.getElementById('barChart').getContext('2d');
     new Chart(ctx, {
         type: 'bar',
@@ -51,19 +26,43 @@ searchForm.addEventListener('submit', async function (event) {
     event.preventDefault();
 
     try {
-        const passengers = await searchPassengers();
+        const sexe = document.getElementById('sexe').value;
+        const age = document.getElementById('age').value;
+        const classe = document.getElementById('classe').value;
 
-        // Utilisez les données récupérées pour créer le graphique en barre
-        if (passengers.length > 0) {
-            const labels = ['Survivants', 'Non-survivants'];
-            const survivorsCount = passengers.filter(passenger => passenger.Survived === 1).length;
-            const nonSurvivorsCount = passengers.filter(passenger => passenger.Survived === 0).length;
-            const data = [survivorsCount, nonSurvivorsCount];
+        console.log('Valeurs du formulaire :', sexe, age, classe);
 
-            createBarChart(labels, data);
+        // J'envoie la requête POST directement au routeur côté serveur
+        const response = await fetch('/results', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                sexe: sexe,
+                age: age,
+                classe: classe
+            })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Données récupérées :', data);
+
+            // J'utilise les données récupérées pour créer le graphique en barre
+            if (data.length > 0) {
+                const labels = ['Survivants', 'Non-survivants'];
+                const survivorsCount = data.filter(passenger => passenger.Survived === 1).length;
+                const nonSurvivorsCount = data.filter(passenger => passenger.Survived === 0).length;
+                const chartData = [survivorsCount, nonSurvivorsCount];
+
+                createBarChart(labels, chartData);
+            } else {
+                // Aucun passager correspondant aux critères de recherche
+                // Afficher un message approprié ou effectuer une autre action
+            }
         } else {
-            // Aucun passager correspondant aux critères de recherche
-            // Afficher un message approprié ou effectuer une autre action
+            throw new Error('Erreur lors de la récupération des passagers.');
         }
     } catch (error) {
         console.error(error);

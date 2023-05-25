@@ -6,6 +6,10 @@ const passengerSchema = Schema({
     Pclass: { type: Number, required: true },
     Sex: { type: String, required: true },
     Age: { type: Number, required: true },
+    Survived: {
+        type: Boolean,
+        required: true
+    }
 }, { collection: 'passengers' });
 
 const Passenger = model("Passenger", passengerSchema);

@@ -1,4 +1,3 @@
-import mongoose from "mongoose"
 import Users from "../models/Users.js"
 import { Router } from "express"
 
