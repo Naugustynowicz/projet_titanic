@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
 // Fonction pour créer le graphique en barre
-export function createBarChart(labels, data) {
+function createBarChart(labels, data) {
     const ctx = document.getElementById('barChart').getContext('2d');
     new Chart(ctx, {
         type: 'bar',

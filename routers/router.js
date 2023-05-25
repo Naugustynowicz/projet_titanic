@@ -25,20 +25,27 @@ appRouter.post("/results", async (req, res) => {
             Pclass: classe,
         });
 
-        // Calculer le nombre de survivants et de non-survivants
-        const survivorsCount = passengers.filter(passenger => passenger.Survived === 1).length;
-        const nonSurvivorsCount = passengers.filter(passenger => passenger.Survived === 0).length;
+        // Vérifier si des passagers ont été trouvés
+        if (passengers.length > 0) {
+            // Calculer le nombre de survivants et de non-survivants
+            const survivorsCount = passengers.filter(passenger => passenger.Survived === 1).length;
+            const nonSurvivorsCount = passengers.filter(passenger => passenger.Survived === 0).length;
 
-        // Créer les données pour le graphique
-        const chartData = [survivorsCount, nonSurvivorsCount];
+            // Créer les données pour le graphique
+            const chartData = [survivorsCount, nonSurvivorsCount];
 
-        // Render la page des résultats en passant les données au template Pug
-        res.render("results", { chartData });
+            // Render la page des résultats en passant les données au template Pug
+            res.render("results", { passengers, chartData });
+        } else {
+            // Aucun passager ne correspond à la recherche
+            res.render("results", { passengers: [], chartData: [] });
+        }
     } catch (error) {
         console.error("Erreur lors de la recherche des passagers :", error);
         // Gérez les erreurs appropriées
     }
 });
+
 
 
 
