@@ -3,6 +3,7 @@ extends layout
 block content
   h1 Résultats de la recherche
   canvas(id="barChart")
+  canvas(id="barChart2")
 
   if passengers.length > 0
     ul
@@ -21,7 +22,10 @@ block content
   script.
     const labels = ['Survivants', 'Non-survivants'];
     const chartData = !{JSON.stringify(chartData)}; //
-    createBarChart(labels, chartData);
+    createBarChart(labels, chartData, "barChart");
+    const labels2 = ['Moyenne d\'age survivant', 'Moyenne d\'age Non-survivants'];
+    const chartData2 = !{JSON.stringify(chartData2)}; //
+    createBarChart(labels2, chartData2, "barChart2");
 
 
     
