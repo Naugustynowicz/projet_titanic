@@ -1,6 +1,5 @@
 import { Router } from "express"
 import Passenger from "../models/Passenger.js";
-import { createBarChart } from '../barGraph.js';
 
 
 const appRouter = new Router()
@@ -19,35 +18,28 @@ appRouter.post("/results", async (req, res) => {
     const { sexe, age, classe } = req.body;
 
     try {
-        console.log("ma recherche :", sexe, age, classe);
-        // J'effectue une recherche dans ma BDD titanic en utilisant le modèle Passenger
-        const passengersPromise = Passenger.find({
+        // Récupérer les données de la base de données en fonction des critères de recherche
+        const passengers = await Passenger.find({
             Sex: sexe,
             Age: age,
             Pclass: classe,
-        }).exec(); // .exec() permet de retourner une promesse
+        });
 
-        // Attendre la résolution de la promesse
-        const passengers = await passengersPromise;
+        // Calculer le nombre de survivants et de non-survivants
+        const survivorsCount = passengers.filter(passenger => passenger.Survived === 1).length;
+        const nonSurvivorsCount = passengers.filter(passenger => passenger.Survived === 0).length;
 
-        // J'utilise les données récupérées pour créer le graphique en barre
-        if (passengers.length > 0) {
-            const labels = ['Survivants', 'Non-survivants'];
-            const survivorsCount = passengers.filter(passenger => passenger.Survived === 1).length;
-            const nonSurvivorsCount = passengers.filter(passenger => passenger.Survived === 0).length;
-            const chartData = [survivorsCount, nonSurvivorsCount];
+        // Créer les données pour le graphique
+        const chartData = [survivorsCount, nonSurvivorsCount];
 
-            // Appel de la fonction createBarChart avec les labels et les données du graphique
-            createBarChart(labels, chartData);
-        }
-
-        // Je redirige vers la page des résultats
-        res.render("results", { passengers });
+        // Render la page des résultats en passant les données au template Pug
+        res.render("results", { chartData });
     } catch (error) {
         console.error("Erreur lors de la recherche des passagers :", error);
         // Gérez les erreurs appropriées
     }
 });
+
 
 
 

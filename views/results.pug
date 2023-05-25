@@ -1,4 +1,4 @@
-extends layout.pug
+extends layout
 
 block content
   h1 Résultats de la recherche
@@ -13,5 +13,15 @@ block content
     p Aucun passager ne correspond à votre recherche.
 
   button(type="button", id="resetButton") Reset
+
+  // fichier JavaScript barGraph.js
+  script(src="barGraph.js")
+    
+  // appel de la fonction createBarChart avec les données passées
+  script.
+    const labels = ['Survivants', 'Non-survivants'];
+    const chartData = !{JSON.stringify(chartData)}; //
+    createBarChart(labels, chartData);
+
 
     
