@@ -3,6 +3,8 @@ extends layout
 block content
   h1 Résultats de la recherche
   canvas(id="barChart")
+  canvas(id="barChartAvg")
+  canvas(id="barChartStrdDev")
 
   if passengers.length > 0
     ul
@@ -21,7 +23,13 @@ block content
   script.
     const labels = ['Survivants', 'Non-survivants'];
     const chartData = !{JSON.stringify(chartData)}; //
-    createBarChart(labels, chartData);
+    createBarChart(labels, chartData, "barChart", "bar");
+    const labelsAvg = ['Moyenne d\'age survivant', 'Moyenne d\'age Non-survivants'];
+    const chartDataAvg = !{JSON.stringify(chartDataAvg)}; //
+    createBarChart(labelsAvg, chartDataAvg, "barChartAvg", "doughnut");
+    const labelsStrdDev = ['Ecart type age survivant', 'Ecart type age Non-survivants'];
+    const chartDataStrdDev = !{JSON.stringify(chartDataStrdDev)}; //
+    createBarChart(labelsStrdDev, chartDataStrdDev, "barChartStrdDev", "pie");
 
 
     
