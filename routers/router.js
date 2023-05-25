@@ -24,6 +24,14 @@ appRouter.post("/results", async (req, res) => {
       console.log(passengers)
       // Vérifier si des passagers ont été trouvés
       if (passengers.length > 0) {
+        //Création tableau survivant et non-survivant
+        const survivors = passengers.filter(
+          (passenger) => passenger.Survived === true
+        )
+        const nonSurvivors = passengers.filter(
+          (passenger) => passenger.Survived === false
+        )
+
         // Calculer le nombre de survivants et de non-survivants
         const survivorsCount = passengers.filter(
           (passenger) => passenger.Survived === true
@@ -32,12 +40,7 @@ appRouter.post("/results", async (req, res) => {
           (passenger) => passenger.Survived === false
         ).length
 
-        const survivors = passengers.filter(
-          (passenger) => passenger.Survived === true
-        )
-        const nonSurvivors = passengers.filter(
-          (passenger) => passenger.Survived === false
-        )
+        //Calcul moyenne
         var avgSurvivors = 0
         for (var i = 0; i < survivorsCount; i++) {
           avgSurvivors += survivors[i].Age
@@ -50,14 +53,32 @@ appRouter.post("/results", async (req, res) => {
         }
         avgNonSurvivors /= nonSurvivorsCount
 
-        //ecartType = sqrt(avg((x - avg(x)) ^ 2))
+        //Calcul ecartType = sqrt(avg((x - avg(x)) ^ 2))
+        var StrdDevSurvivors = 0
+        for (var i = 0; i < survivorsCount; i++) {
+          StrdDevSurvivors += (survivors[i].Age - avgSurvivors) ** 2
+        }
+        StrdDevSurvivors = Math.sqrt(StrdDevSurvivors / survivorsCount)
+
+        var StrdDevNonSurvivors = 0
+        for (var i = 0; i < nonSurvivorsCount; i++) {
+          StrdDevNonSurvivors += nonSurvivors[i].Age
+        }
+        StrdDevNonSurvivors = Math.sqrt(StrdDevNonSurvivors / nonSurvivorsCount)
+
         // Créer les données pour le graphique
         const chartData = [survivorsCount, nonSurvivorsCount]
-        const chartData2 = [avgSurvivors, avgNonSurvivors]
+        const chartDataAvg = [avgSurvivors, avgNonSurvivors]
+        const chartDataStrdDev = [StrdDevSurvivors, StrdDevNonSurvivors]
         console.log("survivors : " + survivorsCount + " / " + nonSurvivorsCount)
 
         // Render la page des résultats en passant les données au template Pug
-        res.render("results", { passengers, chartData, chartData2 })
+        res.render("results", {
+          passengers,
+          chartData,
+          chartDataAvg,
+          chartDataStrdDev,
+        })
       } else {
         // Aucun passager ne correspond à la recherche
         res.render("results", { passengers: [], chartData: [] })

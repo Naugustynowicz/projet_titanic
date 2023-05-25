@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 
 // Fonction pour créer le graphique en barre
-function createBarChart(labels, data, canvas) {
+function createBarChart(labels, data, canvas, type) {
   const ctx = document.getElementById(canvas).getContext("2d")
   new Chart(ctx, {
-    type: "bar",
+    type: type,
     data: {
       labels: labels,
       datasets: [
