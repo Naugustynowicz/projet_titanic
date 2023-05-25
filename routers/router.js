@@ -28,11 +28,12 @@ appRouter.post("/results", async (req, res) => {
         // Vérifier si des passagers ont été trouvés
         if (passengers.length > 0) {
             // Calculer le nombre de survivants et de non-survivants
-            const survivorsCount = passengers.filter(passenger => passenger.Survived === 1).length;
-            const nonSurvivorsCount = passengers.filter(passenger => passenger.Survived === 0).length;
+            const survivorsCount = passengers.filter(passenger => passenger.Survived === true).length;
+            const nonSurvivorsCount = passengers.filter(passenger => passenger.Survived === false).length;
 
             // Créer les données pour le graphique
             const chartData = [survivorsCount, nonSurvivorsCount];
+            console.log(chartData)
 
             // Render la page des résultats en passant les données au template Pug
             res.render("results", { passengers, chartData });
