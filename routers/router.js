@@ -21,10 +21,10 @@ appRouter.post("/login", async (req, res) => {
         //motDePasse: motDePasse,
       }).then((user) => {
         if (user[0].motDePasse === motDePasse) {
-          res.cookie("user", pseudo).render("login", { pseudo })
+          res.cookie("user", pseudo).render("search", { pseudo })
         } else {
           const erreur = {
-            statut: "200",
+            statut: "400",
             message: "Le mot de passe ne correspond pas.",
           }
           res.render("erreurs", { erreur })
@@ -32,14 +32,14 @@ appRouter.post("/login", async (req, res) => {
       })
     } catch (error) {
       const erreur = {
-        statut: "200",
+        statut: "400",
         message: "Cet utilisateur n'existe pas.",
       }
       res.render("erreurs", { erreur })
     }
   } else {
     const erreur = {
-      statut: "200",
+      statut: "400",
       message: "Merci de spécifier un nom d'utilisateur",
     }
     res.render("erreurs", { erreur })
@@ -69,6 +69,24 @@ appRouter.post("/results", async (req, res) => {
   } catch (error) {
     console.error("Erreur lors de la recherche des passagers :", error)
     // Gérez les erreurs appropriées
+  }
+})
+
+appRouter.get("/disconnection", async (req, res) => {
+  console.log(req.cookies)
+  if (req.cookies.user) {
+    res.clearCookie("user")
+    const erreur = {
+      statut: "201",
+      message: "L'utilisateur a été déconnecté correctement",
+    }
+    res.render("erreurs", { erreur })
+  } else {
+    const erreur = {
+      statut: "400",
+      message: "Aucun utilisateur n'est connecté.",
+    }
+    res.render("erreurs", { erreur })
   }
 })
 
