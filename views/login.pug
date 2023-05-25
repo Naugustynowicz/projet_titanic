@@ -1,6 +1,10 @@
 extends layout.pug
 
 block content
+
+  if pseudo
+    p= "L'utilisateur " + pseudo + " est connecté"
+
   h1 Connexion
   form(action="/login", method="POST")
     label(for="username") Nom d'utilisateur:

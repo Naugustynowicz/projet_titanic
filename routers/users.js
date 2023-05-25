@@ -26,9 +26,11 @@ appRouter.post("/inscription", async (req, res) => {
   const nationnalite = req.body.nationnalite
 
   if (!pseudo || !motDePasse) {
-    return res
-      .status(400)
-      .send("Le nom et le mot de passe ne peuvent être vide")
+    const erreur = {
+      statut: "400",
+      message: "Le nom et le mot de passe ne peuvent être vide",
+    }
+    res.render("erreurs", { erreur })
   }
 
   try {
@@ -43,20 +45,19 @@ appRouter.post("/inscription", async (req, res) => {
       birthDate: birthDate,
       nationnalite: nationnalite,
     })
-    res.status(201).send("Document inséré")
+    const erreur = {
+      statut: "201",
+      message: "L'utilisateur a été créé correctement.",
+    }
+    res.render("erreurs", { erreur })
   } catch (err) {
     console.log(err)
-    res.status(500).send("Impossible d'insérer le document")
+    const erreur = {
+      statut: "500",
+      message: "Impossible d'insérer le document.",
+    }
+    res.render("erreurs", { erreur })
   }
-
-  // const silence = new kittens({ name: "Silence" })
-  // const fluffy = new kittens({ name: "fluffy" })
-  // await fluffy.save()
-  // const kittens = await kittens.find({ name: /^fluff/ })
-  // console.log(kittens)
-  // console.log(silence.name) // 'Silence'
-
-  //res.render("inscription")
 })
 
 export default appRouter

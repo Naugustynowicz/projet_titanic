@@ -20,6 +20,9 @@ html(lang="fr")
         margin-top: 40px;
         margin-bottom: 30px;
       }
+      h2 {
+        text-align: center;
+      }
       nav {
         font-family: 'Roboto', sans-serif;
         height: 150px
@@ -53,13 +56,29 @@ html(lang="fr")
         align-items: center;
       }
 
+      legend {
+        font-weight: bold;
+        font-size: x-large;
+      }
+
+      p_form  {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+      }
+
+      fieldset{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
       label {
         color: #333;
         font-weight: bold;
       }
 
-      input[type="text"],
-      input[type="password"] {
+      input {
         padding: 8px;
         margin-bottom: 20px;
         border: 1px solid #ccc;
@@ -102,11 +121,14 @@ html(lang="fr")
     nav
       ul
         li
-          a(href="/signup") Inscription
+          a(href="/users/inscription") Inscription
         li
           a(href="/login") Connexion
         li
           a(href="/search") Recherche
+        li 
+          a(href="/disconnection") Deconnexion
+      
 
     block content
 
