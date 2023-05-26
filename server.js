@@ -1,4 +1,3 @@
-import authors from "./routers/router.js"
 import users from "./routers/users.js"
 import appRouter from "./routers/router.js"
 import dotenv from "dotenv"
@@ -30,7 +29,6 @@ app.locals.pretty = NODE_ENV !== "production" ? true : false
 
 // Déclaration des routeurs et middlewares
 app.use(express.urlencoded({ extended: false })) // Fourni l'objet "req.body" lors de la validation de formulaire
-app.use("/author", authors)
 app.use("/users", users)
 
 // Utiliser le routeur
@@ -46,18 +44,3 @@ try {
 } catch (err) {
   console.log("Impossible de démarrer l'application Node", err.message)
 }
-
-const usersSchema = new mongoose.Schema({
-  pseudo: String,
-  motDePasse: String,
-  nom: String,
-  prenom: String,
-  email: String,
-  phoneNumber: String,
-  age: String,
-  birthDate: String,
-  nationnalite: String,
-})
-
-//const User = mongoose.model("User", usersSchema)
-mongoose.model("User", usersSchema)

@@ -45,7 +45,6 @@ appRouter.post("/login", async (req, res) => {
     }
     res.render("erreurs", { erreur })
   }
-  //res.render("login")
 })
 
 // Route vers la page de recherche
