@@ -1,32 +1,33 @@
 extends layout
 
 block content
-    form(action="/author/inscription" method="POST")
+    h1 Inscription
+    form(action="/users/inscription" method="POST")
       section
         fieldset
           legend Formulaire d'inscription 
-          p
-            label(for="pseudo") pseudo : 
+          p_form
+            label(for="pseudo") Pseudo : 
             input(type="text" id="pseudo" name="pseudo")
-          p  
-            label(for="motDePasse") mot de passe : 
+          p_form  
+            label(for="motDePasse") Mot de passe : 
             input(type="password" id="motDePasse" name="motDePasse") 
-          p
+          p_form
             label(for="nom") Nom : 
             input(type="text" id="nom" name="nom")
-          p
+          p_form
             label(for="prenom") Prenom : 
             input(type="text" id="prenom" name="prenom") 
-          p 
+          p_form
             label(for="email") Addresse Mail : 
             input(type="email" id="email" name="email") 
-          p
+          p_form
             label(for="age") Age : 
             input(type="number" id="age" name="age")
-          p
+          p_form
             label(for="birthdate") Date de Naissance : 
             input(type="date" id="birthdate" name="birthdate") 
-          p
+          p_form
             label(for="nationnalite") Nationnalité : 
             input(type="text" id="nationnalite" name="nationnalite") 
       section

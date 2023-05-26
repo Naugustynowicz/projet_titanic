@@ -3,19 +3,25 @@ import users from "./routers/users.js"
 import appRouter from "./routers/router.js"
 import dotenv from "dotenv"
 import express from "express"
+import cookieParser from "cookie-parser"
 import mongoose from "mongoose"
 dotenv.config()
 
 const { APP_HOST, APP_PORT, MONGO_URI, NODE_ENV } = process.env
+//const cookieParser = require("cookie-parser")
 
 const app = express()
-app.use(express.static(process.cwd(), {
-  setHeaders: (res, path) => {
-    if (path.endsWith('.js')) {
-      res.setHeader('Content-Type', 'application/javascript');
-    }
-  }
-}));
+app.use(
+  express.static(process.cwd(), {
+    setHeaders: (res, path) => {
+      if (path.endsWith(".js")) {
+        res.setHeader("Content-Type", "application/javascript")
+      }
+    },
+  })
+)
+app.use(cookieParser())
+
 // Déclarer le moteur de rendu à Express
 app.set("view engine", "pug")
 

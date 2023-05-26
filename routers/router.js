@@ -1,5 +1,6 @@
 /* eslint-disable no-redeclare */
 import { Router } from "express"
+import Users from "../models/Users.js"
 import Passenger from "../models/Passenger.js"
 
 const appRouter = new Router()
